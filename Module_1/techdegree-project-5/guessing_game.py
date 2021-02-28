@@ -7,7 +7,7 @@ from os import system, name
 
 
 # This section is used to set the the difficulty
-low = 0
+low = 1
 difficulty = int(input("Please choose your difficulty. 1 is the lowest, 3 is the highest: "))
 system('clear')
 
@@ -42,7 +42,7 @@ def start_game(low=0, high=0):
     range for the guessing game
     """
     answer = random.randint(low, high)
-    guess = 0
+    guess = None
     tries = 0
     
     print(f'Welcome! please choose a number between {low} and {high} \n')
@@ -55,9 +55,9 @@ def start_game(low=0, high=0):
             continue
         tries += 1
         if guess > answer:
-            print('To High! Guess again.')
+            print('Too High! Guess again.')
         elif guess < answer:
-            print('To low! Guess again.')
+            print('Too low! Guess again.')
     system('clear')
     
     print(f'Correct! You guessed the number in {tries} tries')
