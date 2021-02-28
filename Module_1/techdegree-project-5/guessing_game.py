@@ -1,8 +1,10 @@
 import random
 
-from os import system, name # I tried making a flashing screen at the end 
-                            # using this resource https://www.codespeedy.com/clear-screen-in-python/ 
 from time import sleep
+from os import system, name 
+# I tried making a flashing screen at the end 
+# using this resource https://www.codespeedy.com/clear-screen-in-python/ 
+
 
 # This section is used to set the the difficulty
 low = 0
@@ -17,7 +19,7 @@ else:
     high = 250
 
 # I tried to make a title printer so the text would print 
-# one letter at a time but it only seems to work when I use it in JupyterLab :/ 
+# one letter at a time but it only seems to work when I used it in JupyterLab :/ 
 
 # def title_printer(string):
 #     for letter in string:
@@ -53,11 +55,13 @@ def start_game(low=0, high=0):
         elif guess < answer:
             print('To low! Guess again.')
     system('clear')
+    
     print(f'Correct! You guessed the number in {tries} tries')
 
 
 start_game(low,high)
 
+# This runs after the first game is played and allows you to change the difficulty also
 if input("Would you like to play again? y/n ") == 'y'.lower():
     difficulty = int(input('Please Choose your difficulty: '))
     start_game(low, high)
