@@ -68,6 +68,13 @@ start_game(low,high)
 # This runs after the first game is played and allows you to change the difficulty also
 if input("Would you like to play again? y/n ") == 'y'.lower():
     difficulty = int(input('Please Choose your difficulty: '))
+    if difficulty == 1:
+        high = 10
+    elif difficulty == 2:
+        high = 100
+    else:
+        high = 250
+
     start_game(low, high)
 else:
     ending_message('Thanks for playing', exc=5)
