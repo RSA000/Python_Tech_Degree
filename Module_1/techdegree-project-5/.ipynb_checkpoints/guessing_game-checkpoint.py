@@ -7,6 +7,7 @@ from os import system, name
 
 
 # This section is used to set the the difficulty
+highscore = 1000
 low = 1
 difficulty = int(input("Please choose your difficulty. 1 is the lowest, 3 is the highest: "))
 system('clear')
@@ -18,15 +19,6 @@ elif difficulty == 2:
 else:
     high = 250
 
-# I tried to make a title printer so the text would print 
-# one letter at a time but it only seems to work when I used it in JupyterLab :/ 
-
-# def title_printer(string):
-#     for letter in string:
-#         print(letter, end='')
-#         sleep(0.5)
-
-# This function is for the ending message
 def ending_message(string, exc=5):
     for i in range(exc):
         print(string+('!'*i))
@@ -44,8 +36,13 @@ def start_game(low=0, high=0):
     answer = random.randint(low, high)
     guess = None
     tries = 0
+    global highscore
     
     print(f'Welcome! please choose a number between {low} and {high} \n')
+    print('==================')
+    print('HIGHSCORE')
+    print('==',highscore,'==')
+    print('==================')
     
     while guess != answer:
         try:
@@ -61,8 +58,9 @@ def start_game(low=0, high=0):
     system('clear')
     
     print(f'Correct! You guessed the number in {tries} tries')
-
-
+    if highscore > tries:
+        print('New highscore!')
+        highscore = tries
 
     # This runs after the first game is played and allows you to change the difficulty also
     if input("Would you like to play again? y/n ") == 'y'.lower():
