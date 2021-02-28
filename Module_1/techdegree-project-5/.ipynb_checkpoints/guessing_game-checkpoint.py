@@ -48,7 +48,11 @@ def start_game(low=0, high=0):
     print(f'Welcome! please choose a number between {low} and {high} \n')
     
     while guess != answer:
-        guess = int(input('Type your guess now: '))
+        try:
+            guess = int(input('Type your guess now: '))
+        except ValueError:
+            print('You must type a number :p')
+            continue
         tries += 1
         if guess > answer:
             print('To High! Guess again.')
