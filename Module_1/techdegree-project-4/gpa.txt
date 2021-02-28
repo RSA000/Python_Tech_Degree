@@ -1,0 +1,36 @@
+retrieve student_grades
+set grades to student_grades
+set grade_total to 0
+for each grade in grades
+    if grade is not a 1,2,3,4
+    print "invalid grade"
+    print grade
+    print "can't complete caclulation"
+    stop
+    else add grade to grade_total
+    endif
+endfor
+set gpa to grade_total / number of grades
+print gpa
+
+
+function calculate_gpa
+    pass in student_grades
+    set grades to student_grades
+    set grade_total to 0
+    for each grade in grades
+        if grade is not a 1,2,3,4
+        print "invalid grade"
+        print grade
+        print "can't complete caclulation"
+        stop
+        else add grade to grade_total
+        endif
+    endfor
+    set gpa to grade_total / number of grades
+    return gpa
+    endfunction
+
+set reggie_grades to 4,4,3,4
+set reggie_gpa to call calculate_gpa with reggie_grades
+print reggie_gpa
