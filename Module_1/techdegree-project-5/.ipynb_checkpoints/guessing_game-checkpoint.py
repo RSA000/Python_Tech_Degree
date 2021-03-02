@@ -42,7 +42,7 @@ def start_game(low=0, high=0):
         try:
             guess = int(input('Type your guess now: '))
         except ValueError:
-            print('You must type a number :p')
+            print('You must type a number :p \n')
             continue
         tries += 1
         if guess > answer and guess > high:
@@ -74,7 +74,7 @@ def start_game(low=0, high=0):
                 high = 250
                 break
             else:
-                print('Sorry thats not a valid input :( ')
+                print('Sorry thats not a valid input :( \n')
             continue
         start_game(low, high)
     else:
@@ -84,6 +84,7 @@ def start_game(low=0, high=0):
 # This section is used to set the the difficulty
 highscore = 1000
 low = 1
+
 while True:
     difficulty = input("Please choose your difficulty. 1 is the lowest, 3 is the highest: ")
     os.system('cls' if os.name == 'nt' else 'clear')
