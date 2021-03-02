@@ -46,13 +46,13 @@ def start_game(low=0, high=0):
             continue
         tries += 1
         if guess > answer and guess > high:
-            print('Way too high. number out of guessing range \n')  
+            print(f'\n Way too high. number out of guessing range (guess must be between {low} and {high}) \n')  
         elif guess > answer:
-            print('Too High! Guess again \n.')
+            print('\n Too High! Guess again \n.')
         elif guess < answer and guess < low:
-            print('Way too low! number out of guessing range \n')
+            print(f'\n Way too low! number out of guessing range (guess must be between {low} and {high}) \n')
         elif guess < answer:
-            print('Too low! Guess again. \n')
+            print('\n Too low! Guess again. \n')
     os.system('cls' if os.name == 'nt' else 'clear')
     
     print(f'Correct! You guessed the number in {tries} tries')
