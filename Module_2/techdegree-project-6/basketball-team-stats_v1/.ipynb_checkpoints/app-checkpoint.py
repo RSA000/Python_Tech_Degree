@@ -65,6 +65,8 @@ def balance_teams(teams, players):
 
             
 def console(team_list):
+    """This function will display team stats."""
+    
     os.system('cls' if os.name == 'nt' else 'clear')
     print("===========================")
     print('Basketball Team Stats Tool\n===========================\n\n')
