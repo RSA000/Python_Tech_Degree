@@ -23,7 +23,13 @@ def clean_data():
             player['experience'] = False
     for player in players:
         player['height'] = float(player['height'][0:2])
+        
+    for player in players:
+        player['guardians'] = player['guardians'].split(' and ')
+        
     return teams, players
+    
+        
 
 
 def balance_teams(teams, players):
@@ -60,7 +66,8 @@ def balance_teams(teams, players):
             
 def console(team_list):
     os.system('cls' if os.name == 'nt' else 'clear')
-    print('Basketball Team Stats Tool \n\n')
+    print("===========================")
+    print('Basketball Team Stats Tool\n===========================\n\n')
     print('== MENU == \n')
     print('Options Index:')
     print('A) Display Teams')
@@ -80,7 +87,7 @@ def console(team_list):
             break
         elif choice.upper() =='B':
             os.system('cls' if os.name == 'nt' else 'clear')
-            print("THANK YOU")
+            print("Thank You")
             sleep(2)
             sys.exit()
         else:
@@ -88,64 +95,77 @@ def console(team_list):
             print("Sorry, thats not a valid input (A or B)")
             continue
     
-    
     while True:
-        team_choice = input(f"Please enter an option \n {1}-{len(team_list)} - Teams \n type B to quit \n")
+        while True:
+            team_choice = (input(f"Please select a team (1-{len(team_list)}) \n")) 
+            try:
+                int(team_choice) in [i for i in range(len(team_list)+1)]
+                if int(team_choice) > len(team_list):
+                    print(f'Sorry that is not a valid input. Please type a number between (0-{len(team_list)}) or B to quit')
+                    continue
+                team_choice = int(team_choice) -1
+                break
+            except ValueError:
+                print(f'Sorry that is not a valid input. Please type a number between (0-{len(team_list)}) or B to quit')
+            if team_choice.upper() == 'B':
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("Thank You")
+                sleep(2)
+                sys.exit()
+
+        team_name = team_list[team_choice][0]
+        total_players = len(team_list[team_choice][1:])
+        player_names = [player['name'] for player in team_list[team_choice][1:]]
+        guardian_names = [player['guardians'] for player in team_list[team_choice][1:]]
+        player_heights = [player['height'] for player in team_list[team_choice][1:]]
+        height_average = round(sum(player_heights) / len(player_heights), 1)
+
+        experienced = 0
+        unexperienced = 0
+        for i in range(len(team_list[team_choice][1:])):
+            if team_list[team_choice][1:][i]['experience'] == True:
+                experienced += 1
+            else:
+                unexperienced += 1
         os.system('cls' if os.name == 'nt' else 'clear')
-
-        if team_choice.upper() == 'B':
-            print("THANK YOU")
-            sleep(1.5)
-            sys.exit()
-        elif int(team_choice) <= len(team_list):
-            chosen_team = team_list[(int(team_choice) -1)]    
-            team_name = chosen_team[0].upper()
-            heights = [i['height'] for i in chosen_team]
-            heights_average = round((sum(heights)/len(chosen_team)),1)
-            experienced = 0
-            unexperienced = 0
-
-            for i in chosen_team:
-                if i['experience'] == True:
-                    experienced += 1
-                else:
-                    unexperienced += 1
-
-
-            print("=====================")
-            print(f'TEAM: {team_name}')
-            print("=====================")
-            print('Average Height \n'.center(20), f'[{heights_average}]'.center(10))
-            print("----------------------")
-            print(f' total players {len(chosen_team)}')
-            print("----------------------")
-            print('Experienced Players \n', f'[{experienced}]'.center(15))
-            print("----------------------")
-            print('Unexpienced Players \n', f'[{unexperienced}]'.center(15))
-            print("----------------------")
-            print("=====================")
-            print("|||||||||||||||||||||")
-            print("=====================")
-            print("PLAYERS".center(20))
-            print("=====================")
-            for i in chosen_team:
-                print(i['name'].center(20))            
-            print("=====================")
-            print("|||||||||||||||||||||")
-            print("=====================")
-            print("GUARDIANS".center(20))
-            print("=====================")
-            for i in chosen_team:
-                print(i['guardians'].center(20))
-            print("===================== \n")
-        else:
-            print('Thats not a valid options :/ Choose a number to select a team or B to quit')
-            continue
         
+        print("=======================")
+        print(f"==== {team_name.upper()} ====".center(22))
+        print("=======================")
+        print("|||||||||||||||||||||||")
+        print("________________________")
+        print(f"Total Players: {total_players}")
+        print("________________________")
+        print(f"Experienced Players {experienced}")
+        print(f"Unexpienced Players {unexperienced}")
+        print("________________________")
+        print(f"Average Height {height_average}")
+        print("=======================")
+        print("Player Names: \n")
+        for name in player_names:
+            print('-', name, end=',\n')
+        
+        print("\n=======================")
+        print("Guardian Names:\n")
+        for guardian in guardian_names:
+            for i in guardian:
+                print('-', i, end=(', '))
+            print('')
+        print("\n=======================")
+        
+        while True:
+            end_message = input("Choose another team? y/n \n")
+            if end_message.upper() == 'Y':
+                break
+            elif end_message.upper() == 'N':
+                    os.system('cls' if os.name == 'nt' else 'clear')
+                    print("Thank You")
+                    sleep(2)
+                    sys.exit()
+            else:
+                print("Sorry that is not a valid input, please type Y or N")
+        continue
     
-    
-        
-        
 if __name__ == "__main__":
     teams, players = clean_data()
     team_list = balance_teams(teams, players)
