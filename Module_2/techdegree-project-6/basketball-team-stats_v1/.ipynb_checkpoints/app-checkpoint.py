@@ -80,12 +80,6 @@ def console(team_list):
         choice = input("Please enter an option \n")
         if choice.upper() == 'A':
             os.system('cls' if os.name == 'nt' else 'clear')
-            print('==================')
-            print('===== TEAMS ======')
-            print('==================')
-            for i in range(len(team_list)):
-                print(f"{i+1}: ", team_list[i][0])
-            print('================== \n\n')
             break
         elif choice.upper() =='B':
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -99,21 +93,31 @@ def console(team_list):
     
     while True:
         while True:
-            team_choice = (input(f"Please select a team (1-{len(team_list)}) \n")) 
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('==================')
+            print('===== TEAMS ======')
+            print('==================')
+            for i in range(len(team_list)):
+                print(f"{i+1}: ", team_list[i][0])
+            print('================== \n\n')
+            team_choice = (input(f"Please select a team (1-{len(team_list)}) \n Or press B to quit ")) 
             try:
                 int(team_choice) in [i for i in range(len(team_list)+1)]
                 if int(team_choice) > len(team_list):
                     print(f'Sorry that is not a valid input. Please type a number between (0-{len(team_list)}) or B to quit')
+                    sleep(0.9)
                     continue
                 team_choice = int(team_choice) -1
                 break
             except ValueError:
-                print(f'Sorry that is not a valid input. Please type a number between (0-{len(team_list)}) or B to quit')
-            if team_choice.upper() == 'B':
-                os.system('cls' if os.name == 'nt' else 'clear')
-                print("Thank You")
-                sleep(2)
-                sys.exit()
+                if team_choice.upper() == 'B':
+                    os.system('cls' if os.name == 'nt' else 'clear')
+                    print("Thank You")
+                    sleep(2)
+                    sys.exit()
+                else:
+                    print(f'Sorry that is not a valid input. Please type a number between (0-{len(team_list)}) or B to quit')
+                    sleep(0.9)
 
         team_name = team_list[team_choice][0]
         total_players = len(team_list[team_choice][1:])
@@ -145,14 +149,13 @@ def console(team_list):
         print("=======================")
         print("Player Names: \n")
         for name in player_names:
-            print('-', name, end=',\n')
+            print(name, end=', ')
         
         print("\n=======================")
         print("Guardian Names:\n")
         for guardian in guardian_names:
             for i in guardian:
-                print('-', i, end=(', '))
-            print('')
+                print(i, end=(', '))
         print("\n=======================")
         
         while True:
@@ -166,6 +169,9 @@ def console(team_list):
                     sys.exit()
             else:
                 print("Sorry that is not a valid input, please type Y or N")
+                sleep(0.9)
+                os.system('cls' if os.name == 'nt' else 'clear')
+                
         continue
     
 if __name__ == "__main__":
